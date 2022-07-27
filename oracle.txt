@@ -1,0 +1,23 @@
+Oracle Database
+    rcq 123456
+
+
+异常处理：
+    * oracle library is not loaded
+        Navicat连接Oracle时需要指定oci.dll文件。工具 -> 选项 -> 环境
+        https://www.cnblogs.com/jinke/p/12916981.html
+    * ORA-28040: No matching authentication protocol
+        oci.dll版本不匹配，下载官网新版。目录 添加到环境变量PATH
+        https://www.oracle.com/database/technologies/instant-client/downloads.html    
+    * ORA-00942: 表或视图不存在
+        # oracle是大小写敏感的
+        # 如果定义表名称或列名称的时候没有用引号引起来
+        # oracle会把他们全部转换为大写,这时就会出现错误了
+        cursor.execute('select * from "test"')  #执行sql语句
+        
+server
+    公有ip：101.37.162.212
+    私有ip：172.16.81.88
+    账号：administrator
+    密码：Thokadmin123
+    

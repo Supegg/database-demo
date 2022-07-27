@@ -1,0 +1,60 @@
+1.监控
+	查看当前是否开启profile功能命令：db.getProfilingLevel()返回level等级
+	值为0|1|2，分别代表意思：0代表关闭，1代表记录慢命令，2代表全部。
+	设置profile功能为db.setProfilingLevel(level);
+	level为1的时候，慢命令默认值为100ms
+	更改为db.setProfilingLevel(1,50)这样就更改为50毫秒
+	
+	通过db.system.profile.find() 查看当前的监控日志
+		ts：命令执行时间
+		info：命令的内容
+		query：代表查询
+		order.order： 代表查询的库与集合
+		reslen：返回的结果集大小，byte数
+		nscanned：扫描记录数量
+		nquery：后面是查询条件
+		nreturned：返回记录数及用时
+		millis：所花时间
+		
+2.索引
+	为待查询的字段建立索引，不过需要特别注意的是，索引不是万能灵药
+	如果需要查询超过一半的集合数据，索引还不如直接遍历来的好
+	索引的原理是通过建立指定字段的B树，通过搜索B树来查找对应document的地址
+	在索引列中每个数据的重复数量称为颗粒，索引列颗粒越小越好
+		db.values.createIndex({open: 1, close: 1}, {background: true})	#后台创建索引
+
+3.查询执行过程
+	db.order.find().explain()
+	{
+		"cursor" : "BasicCursor",#游标类型
+		"nscanned" : 2010000,#扫描数量
+		"nscannedObjects" : 2010000,#扫描对象
+		"n" : 337800,#返回数据
+		"millis" : 2838,#耗时
+		"nYields" : 0,
+		"nChunkSkips" : 0,
+		"isMultiKey" : false,
+		"indexOnly" : false,
+		"indexBounds" : {#使用索引（这里没有）
+			
+		}
+	}
+
+4.设计优化
+	根据业务场景判断数据的读写频率
+	1.完全分离（范式化设计）
+		关系型设计，信息分离，通过关联字段查询
+		
+	2.完全内嵌（反范式化设计）
+		引用信息多处冗余
+		
+	3.部分内嵌（折中方案）
+	
+5.其他方法
+	热数据法
+	文件系统法
+	硬件大法
+	
+
+ref:
+	https://www.jianshu.com/p/b77a33fbe824

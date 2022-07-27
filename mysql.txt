@@ -1,0 +1,32 @@
+添加mysql.ini配置文件
+初始化数据库
+	mysqld --initialize --console
+    # 注意记录root初始密码
+    
+安装
+	mysqld install
+    # sc delete MySQL
+    
+启动
+	net start mysql
+	
+登陆
+	mysql -h host -u user -p
+	
+修改密码
+	ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';
+    
+修改验证方式 mysql_native_password
+# SELECT Host, User, plugin from user;
+show databases;
+use mysql;
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+FLUSH PRIVILEGES;
+    
+添加至环境变量 PATH
+	
+允许远程登陆
+    update user set host = '%' where user = 'root'; # restart mysql service
+        https://www.cnblogs.com/cnblogsfans/archive/2009/09/21/1570942.html
+        
+        

@@ -1,0 +1,50 @@
+常用方法：
+mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
+eg:
+	mongo mongodb://camuser:camuser@192.168.10.13:27017/camSync2
+	mongo mongodb://192.168.10.13:27017/camSync2
+
+show dbs
+use test
+db.dropDatabase()
+db.createCollection(name)
+show collections
+db.mycol.drop()
+db.mycol.insert({})
+db.mycol.find(query, projection)。limit(num).skip(num).pretty
+db.mycol.update(query, update)
+db.mycol.save()	#替换文档
+db.mycol.remove(query)
+db.mycol.find().sort({KEY:1})
+db.test.find({ $where: "this.test.length > 2" }) #where条件
+db.test.find().collation({"locale": "zh", "numericOrdering":True})
+db.mycol.createIndex(keys, options)	#建索引，对查询优化帮助极大
+	db.values.createIndex({open: 1, close: 1}, {background: true})
+db.mycol.aggregate(AGGREGATE_OPERATION)
+
+mongodump -h dbhost -d dbname -o dbdirectory
+mongorestore -h <hostname><:port> -d dbname <path>
+
+
+
+---------------------------------------------------------
+安装：
+mongodb-win32-x86_64-2008plus-ssl-4.0.4
+mongodb-compass-1.16.3-win32-x64
+
+1.在安装目录新建 data，logs 目录
+2.在logs目录下新建mongodb.logs
+3.编辑mongodb.config
+dbpath=D:\DB\mongodb\data #数据库路径
+logpath=D:\DB\mongodb\logs\mongodb.log #日志输出文件路径
+logappend=true #错误日志采用追加模式
+journal=true #启用日志文件，默认启用
+quiet=true #过滤掉无用的日志信息，若需要调试使用请设置为false
+port=27017 #端口号 默认为27017
+
+3.添加至环境变量PATH
+4.添加系统服务
+	mongod --config D:\DB\mongodb\mongodb.config --install --serviceName "MongoDB"
+5.启动服务
+	net start mongodb
+	

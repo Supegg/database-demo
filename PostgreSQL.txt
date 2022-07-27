@@ -1,0 +1,56 @@
+PostgreSQL
+    
+Installation
+    password：123456
+    port：5432
+    
+    
+Management clinet:
+    pgAdmin4.exe    
+
+常用命令：
+    psql -h localhost -p 5432 -U postgres dbname # 连接到指定数据库
+    \l  # 显示数据库列表
+    \c dbname   # 切换到dbname数据库
+    \d # 显示data table列表
+
+关键字示例：
+    EXISTS (collection)   # collection是否为null
+    column IN (collection) # column 在子查询结果里
+    -----------WITH 子句，类似于临时表
+    With:
+        WITH name_for_summary_data AS (SELECT Statement) # CTS, Common Table Express
+        SELECT columns FROM name_for_summary_data;
+    -----------分组聚合
+    GROUP BY column1, column2
+    HAVING [ conditions ] # 限定group的条件
+    ORDER BY column1, column2
+    -----------
+    SELECT DISTINCT name FROM COMPANY; # 获取唯一的记录
+    -----------JOIN连接
+    交叉连接（CROSS JOIN）把第一个表的每一行与第二个表的每一行进行匹配
+    内连接（INNER JOIN），有条件的交叉连接，是默认的连接类型。
+    左外连接（LEFT OUTER JOIN），当条件不满足时，右表值为null
+    右外连接（RIGHT OUT JOIN），当条件不满足时，左表值为null
+    全外连接（FULL OUTER JOIN），左右外联的并集
+    -----------
+    UNION合并两个相同结构的结果集，过滤相同行
+    UNION ALL合并两个相同结构的结果集，保留相同行
+    -----------
+    NULL 值代表遗漏的未知数据
+    触发器是数据库的回调函数，它会在指定的数据库事件发生时自动执行/调用
+    索引有助于加快 SELECT 查询和 WHERE 子句，但它会减慢使用 UPDATE 和 INSERT 语句时的数据输入
+    ALTER TABLE 命令用于添加，修改，删除一张已经存在表的列
+    View（视图）是一张假表，只不过是通过相关的名称存储在数据库中的一个 PostgreSQL 语句
+    TRANSACTION（事务）是数据库管理系统执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成
+    锁主要是为了保持数据库数据的一致性，可以阻止用户修改一行或整个表，一般用在并发较高的数据库中
+    
+    PRIVILEGES（权限），GRANT 和 REVOKE 
+    
+    
+    
+----------------------------------------------------------------
+References:
+    https://www.postgresql.org/
+    https://www.runoob.com/postgresql/postgresql-tutorial.html
+    

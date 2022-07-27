@@ -1,0 +1,49 @@
+1.下载解压最新版redis
+2.运行服务端
+	redis-server.exe [redis.windows.conf]
+	安装到Windows服务
+		redis-server.exe --service-install redis.windows.conf --loglevel verbose
+			- 开启服务 redis-server --service-start 
+			- 关闭服务 redis-server --service-stop 
+			- 卸载服务 redis-server --service-uninstall 
+			- 服务重命名 redis-server --service-name server-name
+	
+3.连接
+	redis-cli.exe -h 127.0.0.1 -p 6379
+
+4.管理工具RedisDesktopManager，简称 RDM
+    
+-------------------------------------------------------------------------------
+Redis 是一个高性能的key-value数据库
+
+string 是redis最基本类型
+    set key value [EX seconds] [PX milliseconds] [NX|XX]
+    get key
+
+hash 是一个键值(key=>value)对集合，类比dict
+    hmset key field value [field value ...] 
+    hmget key field [field ...] 
+
+list是简单的字符串列表，类比 list<string>   
+    lpush key value [value ...] 
+    lrange key start stop
+
+set 是 string 类型的无序集合，类比 set
+    sadd key member [member ...] 
+    smembers key 
+
+zset 是 string 类型的有序集合，类比 sorted set
+    zadd key [NX|XX] [CH] [INCR] score member [score member ...]   
+    zrange key start stop [WITHSCORES] 
+
+del 删除key[s]
+    del key [key ...] 
+    
+subscribe starwars  订阅
+publish starwars "May the Force be with you."   发布
+
+-------------------------------------------------------------------------------
+引用：
+	https://blog.csdn.net/Mrqiang9001/article/details/79428976
+	https://www.runoob.com/redis/redis-tutorial.html
+    
