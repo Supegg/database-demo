@@ -48,7 +48,6 @@ Management clinet:
     PRIVILEGES（权限），GRANT 和 REVOKE 
     
     
-    
 ----------------------------------------------------------------
 References:
     https://www.postgresql.org/
